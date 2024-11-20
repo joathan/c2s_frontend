@@ -25,6 +25,7 @@ const TaskEdit: React.FC = () => {
         return;
       }
 
+      // TODO: trocar para usar o token
       try {
         const response = await fetch(`http://localhost:3200/api/v1/tasks/${id}`, {
           headers: {
@@ -113,6 +114,7 @@ const TaskEdit: React.FC = () => {
           <option value="pending">Pendente</option>
           <option value="in_progress">Em progresso</option>
           <option value="completed">Concluída</option>
+          <option value="failed">Falhou</option>
         </select>
       </div>
       <div className="mb-3">
