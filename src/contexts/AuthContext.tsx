@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 interface AuthContextData {
   token: string | null;
@@ -8,17 +8,17 @@ interface AuthContextData {
 
 const AuthContext = createContext<AuthContextData | undefined>(undefined);
 
-export const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [token, setToken] = useState<string | null>(localStorage.getItem("authToken"));
 
   const login = (token: string) => {
-    localStorage.setItem("authToken", token);
     setToken(token);
+    localStorage.setItem("authToken", token);
   };
 
   const logout = () => {
-    localStorage.removeItem("authToken");
     setToken(null);
+    localStorage.removeItem("authToken");
   };
 
   return (
