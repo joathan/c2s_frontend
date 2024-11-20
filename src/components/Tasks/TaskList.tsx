@@ -1,31 +1,50 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const TaskList: React.FC = () => {
-  const { token } = useAuth();
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
+      const token = localStorage.getItem("authToken");
+
+      if (!token) {
+        alert("Você precisa estar logado para visualizar as tasks.");
+        window.location.href = "/login";
+        return;
+      }
+
       try {
-        const response = await axios.get("http://localhost:3200/api/v1/tasks", {
-          headers: { Authorization: `Bearer ${token}` },
+        const response = await fetch("http://localhost:3200/api/v1/tasks", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
-        setTasks(response.data);
+
+        if (response.ok) {
+          const data = await response.json();
+          setTasks(data);
+        } else {
+          alert("Erro ao carregar tasks.");
+        }
       } catch (error) {
-        alert("Failed to load tasks.");
+        console.error("Erro ao carregar tasks:", error);
       }
     };
+
     fetchTasks();
-  }, [token]);
+  }, []);
 
   return (
     <div>
-      <h2>Tasks</h2>
+      <h1>Lista de Tasks</h1>
+      <Link to="/tasks/new">Criar Nova Task</Link>
       <ul>
         {tasks.map((task: any) => (
-          <li key={task.id}>{task.title}</li>
+          <li key={task.id}>
+            <p>Título: {task.title}</p>
+            <p>Status: {task.status}</p>
+          </li>
         ))}
       </ul>
     </div>
