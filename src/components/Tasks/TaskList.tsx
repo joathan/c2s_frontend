@@ -35,6 +35,35 @@ const TaskList: React.FC = () => {
     fetchTasks();
   }, []);
 
+  const handleDelete = async (taskId: number) => {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+      alert("Você precisa estar logado para realizar esta ação.");
+      return;
+    }
+
+    if (window.confirm("Tem certeza que deseja excluir esta tarefa?")) {
+      try {
+        const response = await fetch(`http://localhost:3200/api/v1/tasks/${taskId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          alert("Task excluída com sucesso!");
+          setTasks(tasks.filter((task: any) => task.id !== taskId));
+        } else {
+          alert("Erro ao excluir task.");
+        }
+      } catch (error) {
+        console.error("Erro ao excluir task:", error);
+      }
+    }
+  };
+
   return (
     <div className="container mt-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -75,13 +104,15 @@ const TaskList: React.FC = () => {
                   </span>
                 </td>
                 <td>
-                  <Link
-                    to={`/tasks/edit/${task.id}`}
-                    className="btn btn-sm btn-info me-2"
-                  >
+                  <Link to={`/tasks/edit/${task.id}`} className="btn btn-sm btn-info me-2">
                     Editar
                   </Link>
-                  <button className="btn btn-sm btn-danger">Excluir</button>
+                  <button
+                    className="btn btn-sm btn-danger"
+                    onClick={() => handleDelete(task.id)}
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
             ))}
