@@ -9,8 +9,6 @@ import Header from "./components/Shared/Header";
 import Footer from "./components/Shared/Footer";
 import { AuthProvider } from "./contexts/AuthContext";
 
-import './App.css';
-
 const App: React.FC = () => {
   return (
     <AuthProvider>
