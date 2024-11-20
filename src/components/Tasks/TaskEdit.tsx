@@ -17,6 +17,14 @@ const TaskEdit: React.FC = () => {
 
   useEffect(() => {
     const fetchTask = async () => {
+      const token = localStorage.getItem("authToken");
+
+      if (!token) {
+        alert("Você precisa estar logado para visualizar as tasks.");
+        window.location.href = "/login";
+        return;
+      }
+
       try {
         const response = await fetch(`http://localhost:3200/api/v1/tasks/${id}`, {
           headers: {
@@ -45,23 +53,31 @@ const TaskEdit: React.FC = () => {
     e.preventDefault();
 
     try {
+      const token = localStorage.getItem("authToken");
+
       const response = await fetch(`http://localhost:3200/api/v1/tasks/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(task),
+        body: JSON.stringify({
+          task: {
+            title: task?.title,
+            url: task?.url,
+            status: task?.status,
+          },
+        }),
       });
 
       if (response.ok) {
-        alert("Tarefa atualizada com sucesso!");
+        alert("Task atualizada com sucesso!");
         navigate("/tasks");
       } else {
-        setError("Erro ao atualizar a tarefa.");
+        alert("Erro ao atualizar task.");
       }
-    } catch (err) {
-      setError("Erro ao conectar ao servidor.");
+    } catch (error) {
+      console.error("Erro ao atualizar task:", error);
     }
   };
 
