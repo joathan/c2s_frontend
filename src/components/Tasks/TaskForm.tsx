@@ -55,22 +55,6 @@ const TaskForm: React.FC = () => {
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="status" className="form-label">
-            Status
-          </label>
-          <select
-            id="status"
-            className="form-select"
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
-            <option value="pending">Pendente</option>
-            <option value="in_progress">Em Progresso</option>
-            <option value="completed">Concluída</option>
-            <option value="failed">Falhou</option>
-          </select>
-        </div>
-        <div className="mb-3">
           <label htmlFor="url" className="form-label">
             URL
           </label>

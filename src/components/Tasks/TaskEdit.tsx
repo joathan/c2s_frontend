@@ -66,7 +66,6 @@ const TaskEdit: React.FC = () => {
           task: {
             title: task?.title,
             url: task?.url,
-            status: task?.status,
           },
         }),
       });
@@ -99,23 +98,6 @@ const TaskEdit: React.FC = () => {
           onChange={(e) => setTask({ ...task!, title: e.target.value })}
           required
         />
-      </div>
-      <div className="mb-3">
-        <label htmlFor="status" className="form-label">
-          Status
-        </label>
-        <select
-          id="status"
-          className="form-select"
-          value={task?.status || ""}
-          onChange={(e) => setTask({ ...task!, status: e.target.value })}
-          required
-        >
-          <option value="pending">Pendente</option>
-          <option value="in_progress">Em progresso</option>
-          <option value="completed">Concluída</option>
-          <option value="failed">Falhou</option>
-        </select>
       </div>
       <div className="mb-3">
         <label htmlFor="url" className="form-label">
