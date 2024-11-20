@@ -13,19 +13,19 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/tasks" element={<TaskList />} />
-            <Route path="/tasks/new" element={<TaskForm />} />
-
-            <Route path="/logout" element={<Logout />} />
-            {/* Adicione uma rota para a página inicial */}
-            <Route path="/" element={<Login />} />
-          </Routes>
-        </main>
-        <Footer />
+        <div id="app-layout">
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/tasks" element={<TaskList />} />
+              <Route path="/tasks/new" element={<TaskForm />} />
+              <Route path="/logout" element={<Logout />} />
+              <Route path="/" element={<Login />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
       </Router>
     </AuthProvider>
   );
