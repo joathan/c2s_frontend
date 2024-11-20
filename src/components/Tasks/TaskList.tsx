@@ -75,7 +75,12 @@ const TaskList: React.FC = () => {
                   </span>
                 </td>
                 <td>
-                  <button className="btn btn-sm btn-info me-2">Editar</button>
+                  <Link
+                    to={`/tasks/edit/${task.id}`}
+                    className="btn btn-sm btn-info me-2"
+                  >
+                    Editar
+                  </Link>
                   <button className="btn btn-sm btn-danger">Excluir</button>
                 </td>
               </tr>
