@@ -5,7 +5,7 @@ const Logout: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken"); // Remove o token do armazenamento local
+    localStorage.removeItem("authToken");
     alert("Logout realizado com sucesso!");
     navigate("/login");
   };
