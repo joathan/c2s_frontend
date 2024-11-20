@@ -6,14 +6,12 @@ const Register: React.FC = () => {
     password: "",
     confirmPassword: "",
   });
+
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -51,42 +49,61 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
+    <div className="container mt-5">
+      <h2 className="text-center mb-4">Register</h2>
+
+      {error && <div className="alert alert-danger">{error}</div>}
+      {success && <div className="alert alert-success">{success}</div>}
+
+      <form onSubmit={handleSubmit} className="card p-4 shadow">
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email:
+          </label>
           <input
             type="email"
+            id="email"
             name="email"
+            className="form-control"
             value={formData.email}
             onChange={handleChange}
             required
           />
         </div>
-        <div>
-          <label>Password:</label>
+
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">
+            Password:
+          </label>
           <input
             type="password"
+            id="password"
             name="password"
+            className="form-control"
             value={formData.password}
             onChange={handleChange}
             required
           />
         </div>
-        <div>
-          <label>Confirm Password:</label>
+
+        <div className="mb-3">
+          <label htmlFor="confirmPassword" className="form-label">
+            Confirm Password:
+          </label>
           <input
             type="password"
+            id="confirmPassword"
             name="confirmPassword"
+            className="form-control"
             value={formData.confirmPassword}
             onChange={handleChange}
             required
           />
         </div>
-        <button type="submit">Register</button>
+
+        <button type="submit" className="btn btn-primary w-100">
+          Register
+        </button>
       </form>
     </div>
   );

@@ -4,6 +4,7 @@ import Login from "./components/Auth/Login";
 import TaskList from "./components/Tasks/TaskList";
 import TaskForm from "./components/Tasks/TaskForm";
 import TaskEdit from "./components/Tasks/TaskEdit";
+import Register from "./components/Auth/Register";
 
 import Logout from "./components/Auth/Logout";
 import Header from "./components/Shared/Header";
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <main>
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
               <Route path="/tasks" element={<TaskList />} />
               <Route path="/tasks/new" element={<TaskForm />} />
               <Route path="/tasks/edit/:id" element={<TaskEdit />} /> {/* Nova rota */}

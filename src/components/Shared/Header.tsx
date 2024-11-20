@@ -38,6 +38,11 @@ const Header: React.FC = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/register">
+                    Registrar
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/tasks/new">
                     Nova Task
                   </Link>
