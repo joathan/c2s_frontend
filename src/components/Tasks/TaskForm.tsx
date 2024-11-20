@@ -38,37 +38,56 @@ const TaskForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="container mt-4">
       <h1>Criar Task</h1>
-      <div>
-        <label>Título:</label>
-        <input
-          type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Status:</label>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="pending">Pendente</option>
-          <option value="in_progress">Em Progresso</option>
-          <option value="completed">Concluída</option>
-          <option value="failed">Falhou</option>
-        </select>
-      </div>
-      <div>
-        <label>URL:</label>
-        <input
-          type="url"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Criar</button>
-    </form>
+      <form onSubmit={handleSubmit} className="mt-3">
+        <div className="mb-3">
+          <label htmlFor="title" className="form-label">
+            Título
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="status" className="form-label">
+            Status
+          </label>
+          <select
+            id="status"
+            className="form-select"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option value="pending">Pendente</option>
+            <option value="in_progress">Em Progresso</option>
+            <option value="completed">Concluída</option>
+            <option value="failed">Falhou</option>
+          </select>
+        </div>
+        <div className="mb-3">
+          <label htmlFor="url" className="form-label">
+            URL
+          </label>
+          <input
+            type="url"
+            className="form-control"
+            id="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Criar
+        </button>
+      </form>
+    </div>
   );
 };
 
