@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import actionCable from "actioncable";
 import { useAuth } from "../contexts/AuthContext";
+import { toast, ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 interface NotificationTypes {
   user: number;
@@ -10,13 +13,12 @@ interface NotificationTypes {
 const Notifications: React.FC = () => {
   const cableApp = actionCable.createConsumer("ws://localhost:3300/cable"); // Substitua pelo endereço correto
   const [channel, setChannel] = useState<null | actionCable.Channel>(null);
-  const { userId } = useAuth(); // Obtemos o `userId` do contexto de autenticação
+  const { userId } = useAuth();
 
   useEffect(() => {
     if (!userId) return;
 
     if (channel !== null) channel.unsubscribe();
-    // Remove possíveis conexões duplicadas
 
     const newChannel = cableApp.subscriptions.create(
       {
@@ -25,10 +27,9 @@ const Notifications: React.FC = () => {
       },
       {
         received: (message: NotificationTypes) => {
-          // Executa essa função ao receber uma mensagem do servidor
           console.log("Notificação recebida 🎉");
           console.log(message);
-          alert(`Nova mensagem: ${message.message}`);
+          toast.success(`Task atualizada: ${message.message}`);
         },
       }
     );
@@ -39,9 +40,9 @@ const Notifications: React.FC = () => {
       newChannel.unsubscribe();
       console.log("Conexão com o canal encerrada.");
     };
-  }, [userId]); // Reexecuta apenas quando o userId muda
+  }, [userId]);
 
-  return null; // Este componente é invisível e não precisa renderizar nada na interface
+  return <ToastContainer position="top-right" autoClose={7000} />;
 };
 
 export default Notifications;
