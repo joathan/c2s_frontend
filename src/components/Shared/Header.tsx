@@ -38,11 +38,6 @@ const Header: React.FC = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/register">
-                    Registrar
-                  </Link>
-                </li>
-                <li className="nav-item">
                   <Link className="nav-link" to="/tasks/new">
                     Nova Task
                   </Link>
@@ -58,6 +53,11 @@ const Header: React.FC = () => {
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">
                     Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/register">
+                    Registrar
                   </Link>
                 </li>
               </>
