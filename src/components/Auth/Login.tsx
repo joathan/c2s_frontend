@@ -20,10 +20,16 @@ const Login: React.FC = () => {
 
       if (response.ok) {
         const data = await response.json();
-        login(data.token);
-        window.location.href = "/tasks";
-      } else {
+        if (data.token) {
+          login(data.token);
+          window.location.href = "/tasks";
+        } else {
+          alert("No token received. Please contact support.");
+        }
+      } else if (response.status === 401) {
         alert("Invalid credentials. Please try again.");
+      } else {
+        alert("An unexpected error occurred. Please try again later.");
       }
     } catch (error) {
       console.error("Login error:", error);
