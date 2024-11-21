@@ -5,11 +5,11 @@ import TaskList from "./components/Tasks/TaskList";
 import TaskForm from "./components/Tasks/TaskForm";
 import TaskEdit from "./components/Tasks/TaskEdit";
 import Register from "./components/Auth/Register";
-
 import Logout from "./components/Auth/Logout";
 import Header from "./components/Shared/Header";
 import Footer from "./components/Shared/Footer";
-import { AuthProvider } from "./contexts/AuthContext";
+import Notifications from "./components/Notifications";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
 
 const App: React.FC = () => {
   return (
@@ -23,10 +23,11 @@ const App: React.FC = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/tasks" element={<TaskList />} />
               <Route path="/tasks/new" element={<TaskForm />} />
-              <Route path="/tasks/edit/:id" element={<TaskEdit />} /> {/* Nova rota */}
+              <Route path="/tasks/edit/:id" element={<TaskEdit />} />
               <Route path="/logout" element={<Logout />} />
               <Route path="/" element={<Login />} />
             </Routes>
+            <Notifications />
           </main>
           <Footer />
         </div>
@@ -36,4 +37,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
