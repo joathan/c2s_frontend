@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 interface NotificationTypes {
   user: number;
   message: string;
+  title: string;
 }
 
 const Notifications: React.FC = () => {
@@ -29,7 +30,8 @@ const Notifications: React.FC = () => {
         received: (message: NotificationTypes) => {
           console.log("Notificação recebida 🎉");
           console.log(message);
-          toast.success(`Task atualizada: ${message.message}`);
+          console.log(message.user);
+          toast.success(`Task atualizada: ${message['message']}`);
         },
       }
     );
